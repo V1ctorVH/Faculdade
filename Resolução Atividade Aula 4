@@ -1,0 +1,239 @@
+public class Exercicio1 {
+    public static void main(String[] args) {
+
+        // Atividade 1
+
+        int[] numeros = {10,20,30,40,50};
+
+        int soma = 0;
+
+        for (int numero : numeros){
+            soma += numero;
+        }
+        System.out.println("A soma dos elementos do Array é: " + soma);
+    }
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+public class Exercício2 {
+    public static void main(String[] args) {
+
+        // Atividade 2
+
+        int[] numeros = {3, 5, 1, 8, -2, 4, 10, -5};
+
+        encontrarMaiorEMenor(numeros);
+    }
+    public static void encontrarMaiorEMenor(int[] array) {
+
+        if (array.length == 0){
+            System.out.println("O array está vazio.");
+            return;
+        }
+        int maior = array[0];
+        int menor = array[0];
+
+        for (int i = 1; i < array.length; i++){
+            if (array[i] > maior){
+                maior = array[i];
+            }
+            if (array[i] < menor) {
+                menor = array[i];
+            }
+        }
+        System.out.println("Maior Número: " + maior);
+        System.out.println("Menor Número: " + menor);
+    }
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import java.util.Scanner;
+
+public class Exercício3 {
+    public static void main(String[] args) {
+
+        // Atividade 3
+
+        Scanner scanner = new Scanner(System.in);
+        double[] notas = new double[4];
+
+        for (int i = 0; i < 4; i++) {
+            System.out.println("Digite a nota " + (i + 1) + ": ");
+            notas[i] = scanner.nextDouble();
+        }
+
+        double media = calcularMedia(notas);
+
+        System.out.println("A média das notas é: " + media);
+    }
+    public static double calcularMedia(double[]notas) {
+        double soma = 0;
+        for (double nota : notas){
+            soma += nota;
+        }
+        return soma / notas.length;
+    }
+}
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Exercício4 {
+
+    // Atividade 4
+
+    private static ArrayList<String> tarefas = new ArrayList<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+
+        do {
+            System.out.println("\nMenu");
+            System.out.println("1. Adicionar Tarefa");
+            System.out.println("2. Remover Tarefa");
+            System.out.println("3. Listar Tarefas");
+            System.out.println("4. Sair");
+            System.out.println("Escolher uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao){
+                case 1:
+                    System.out.println("Digite a tarefa: ");
+                    String tarefa = scanner.nextLine();
+                    adicionarTarefa(tarefa);
+                    break;
+                case 2:
+                    listarTarefas();
+                    System.out.println("Digite o número da tarefa a ser removida: ");
+                    int index = scanner.nextInt() - 1;
+                    removerTarefa(index);
+                    break;
+                case 3:
+                    listarTarefas();
+                    break;
+                case 4:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida tente novamente.");
+            }
+        }while (opcao != 4);
+    }
+    public static void adicionarTarefa(String tarefa){
+        tarefas.add(tarefa);
+        System.out.println("Tarefa adicionada: " + tarefa);
+    }
+    public static void removerTarefa(int index){
+        if (index >= 0 && index < tarefas.size()){
+            String tarefaRemovida = tarefas.remove(index);
+            System.out.println("Tarefa Removida: " + tarefaRemovida);
+        }else {
+            System.out.println("Índice inválido Tente novamente.");
+        }
+    }
+    public static void listarTarefas(){
+        if (tarefas.isEmpty()){
+            System.out.println("Nenhuma tarefa na lista.");
+        }else {
+            System.out.println("Lista de Tarefas:");
+            for (int i = 0; i < tarefas.size(); i++){
+                System.out.println((i + 1) + ". " + tarefas.get(i));
+            }
+        }
+    }
+
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Exercício5 {
+    private static HashMap<String, String>contatos = new HashMap<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+
+        do{
+            System.out.println("\nMenu:");
+            System.out.println("1. Adicionar contato");
+            System.out.println("2. Remover contado");
+            System.out.println("3. Buscar contato");
+            System.out.println("4. Listar contatos");
+            System.out.println("5. Sair");
+            System.out.println("Escolha uma opção:");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao){
+                case 1:
+                    System.out.println("Digite o nome do contato:");
+                    String nome = scanner.nextLine();
+                    System.out.println("Digite o número de telefone:");
+                    String telefone = scanner.nextLine();
+                    adicionarContato(nome, telefone);
+                    break;
+                case 2:
+                    System.out.println("Digite o nome do contato a ser removido:");
+                    String nomeRemover = scanner.nextLine();
+                    removerContato(nomeRemover);
+                    break;
+                case 3:
+                    System.out.println("Digite o nome do contato a ser buscado:");
+                    String nomeBuscar = scanner.nextLine();
+                    buscarContato(nomeBuscar);
+                    break;
+                case 4:
+                    listarContatos();
+                    break;
+                case 5:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+            }
+        }while (opcao !=5);
+    }
+    public static void adicionarContato(String nome, String telefone){
+        contatos.put(nome, telefone);
+        System.out.println("Contatos adicionado: " + nome + " - " + telefone);
+    }
+    public static void removerContato(String nome){
+        if (contatos.containsKey(nome)){
+            contatos.remove(nome);
+            System.out.println("Contato removido: " + nome);
+        } else {
+            System.out.println("Contato não encontrado.");
+        }
+    }
+    public static void buscarContato(String nome){
+        if (contatos.containsKey(nome)){
+            System.out.println("Contato encontrado: " + nome + " - " + contatos.get(nome));
+        } else {
+            System.out.println("Contato não encontrado.");
+        }
+    }
+    public static void listarContatos(){
+        if (contatos.isEmpty()){
+            System.out.println("Nenhum contato na agenda.");
+        } else {
+            System.out.println("Lista de contatos:");
+            for (String nome: contatos.keySet()){
+                System.out.println(nome + " - " + contatos.get(nome));
+            }
+        }
+    }
+}
